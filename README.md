@@ -52,41 +52,6 @@ A stack escolhida para o projeto é:
 
 ---
 
-## Estrutura inicial do projeto
-
-```txt
-forja-match/
-  public/
-    assets/
-      logo-forja.png
-      games/
-  src/
-    components/
-      StartScreen.jsx
-      SwipeCard.jsx
-      GameScreen.jsx
-      ResultScreen.jsx
-      AdminExport.jsx
-    data/
-      cards.js
-      games.js
-    services/
-      firebase.js
-      analytics.js
-      storage.js
-    utils/
-      match.js
-      csv.js
-    App.jsx
-    main.jsx
-    styles.css
-  .env.example
-  package.json
-  README.md
-```
-
----
-
 ## Pré-requisitos
 
 Antes de iniciar o desenvolvimento, instalar:
