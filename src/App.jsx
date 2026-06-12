@@ -1,7 +1,7 @@
 import { cards } from "./data/cards";
 import { games } from "./data/games";
 import { updatePlayerProfile, calculateMatch } from "./utils/match";
-import forja_logo from './assets/f_forja_white.png'
+import forja_logo from './assets/forja_match_logo.png'
 
 function App() {
   let playerProfile = {};
