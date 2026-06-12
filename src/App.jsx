@@ -1,46 +1,88 @@
+import { useState } from "react";
+
+import StartScreen from "./components/StartScreen";
+import GameScreen from "./components/GameScreen";
+import ResultScreen from "./components/ResultScreen";
+
 import { cards } from "./data/cards";
 import { games } from "./data/games";
 import { updatePlayerProfile, calculateMatch } from "./utils/match";
-import forja_logo from './assets/forja_match_logo.png'
 
 function App() {
-  let playerProfile = {};
+  const [screen, setScreen] = useState("start");
+  const [currentCardIndex, setCurrentCardIndex] = useState(0);
+  const [playerProfile, setPlayerProfile] = useState({});
+  const [answers, setAnswers] = useState([]);
+  const [result, setResult] = useState(null);
 
-  playerProfile = updatePlayerProfile(playerProfile, cards[0], "right");
-  playerProfile = updatePlayerProfile(playerProfile, cards[1], "right");
-  playerProfile = updatePlayerProfile(playerProfile, cards[2], "right");
-  playerProfile = updatePlayerProfile(playerProfile, cards[5], "right");
+  const currentCard = cards[currentCardIndex];
 
-  const result = calculateMatch(playerProfile, games);
+  function startGame() {
+    setScreen("game");
+    setCurrentCardIndex(0);
+    setPlayerProfile({});
+    setAnswers([]);
+    setResult(null);
+  }
+
+  function handleAnswer(direction) {
+    const card = cards[currentCardIndex];
+
+    const updatedProfile = updatePlayerProfile(playerProfile, card, direction);
+
+    const updatedAnswers = [
+      ...answers,
+      {
+        cardId: card.id,
+        direction,
+        answeredAt: new Date().toISOString()
+      }
+    ];
+
+    setPlayerProfile(updatedProfile);
+    setAnswers(updatedAnswers);
+
+    const isLastCard = currentCardIndex === cards.length - 1;
+
+    if (isLastCard) {
+      const matchResult = calculateMatch(updatedProfile, games);
+
+      setResult(matchResult);
+      setScreen("result");
+      return;
+    }
+
+    setCurrentCardIndex(currentCardIndex + 1);
+  }
+
+  function restartGame() {
+    setScreen("start");
+    setCurrentCardIndex(0);
+    setPlayerProfile({});
+    setAnswers([]);
+    setResult(null);
+  }
 
   return (
     <main className="app">
-      <header className='title'>
-        <img id='forja-logo' src={forja_logo} alt="" srcset="" />
-        <h1>FORJA Match</h1>
-      </header>
+      {screen === "start" && <StartScreen onStart={startGame} />}
 
-      <section>
-        <h2>Teste do algoritmo</h2>
+      {screen === "game" && currentCard && (
+        <GameScreen
+          card={currentCard}
+          currentIndex={currentCardIndex}
+          totalCards={cards.length}
+          onAnswer={handleAnswer}
+        />
+      )}
 
-        <p>
-          O jogo que deu match foi:
-        </p>
-
-        <h3>{result.game.name}</h3>
-
-        <p>{result.game.description}</p>
-
-        <h2>Ranking</h2>
-
-        <ol>
-          {result.ranking.map((item) => (
-            <li key={item.game.id}>
-              {item.game.name} — {item.score} pontos
-            </li>
-          ))}
-        </ol>
-      </section>
+      {screen === "result" && result && (
+        <ResultScreen
+          result={result}
+          answers={answers}
+          onRestart={restartGame}
+        />
+      )}
     </main>
   );
 }
