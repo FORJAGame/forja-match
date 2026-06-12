@@ -1,7 +1,12 @@
+import forja_logo from './assets/f_forja_white.png'
+
 function App() {
   return (
     <main className="app">
-      <h1>FORJA Match</h1>
+      <header className='title'>
+        <img id='forja-logo' src={forja_logo} alt="" srcset="" />
+        <h1>FORJA Match</h1>
+      </header>
       <p>O jogo está rodando</p>
     </main>
   );
