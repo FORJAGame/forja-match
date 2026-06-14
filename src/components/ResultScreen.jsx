@@ -1,4 +1,4 @@
-function ResultScreen({ result, answers, onRestart }) {
+function ResultScreen({ result, answers, session, onRestart }) {
   const game = result.game;
 
   return (
@@ -51,6 +51,12 @@ function ResultScreen({ result, answers, onRestart }) {
         <p>
           Respostas registradas: <strong>{answers.length}</strong>
         </p>
+
+        {session && (
+          <p>
+            Sessão salva localmente: <strong>{session.id}</strong>
+          </p>
+        )}
       </div>
 
       <button className="primary-button" onClick={onRestart}>
