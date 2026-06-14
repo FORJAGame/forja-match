@@ -1,3 +1,5 @@
+import SwipeCard from "./SwipeCard";
+
 function GameScreen({ card, currentIndex, totalCards, onAnswer }) {
   const progress = currentIndex + 1;
 
@@ -16,23 +18,23 @@ function GameScreen({ card, currentIndex, totalCards, onAnswer }) {
         </div>
       </header>
 
-      <article className="match-card">
-        <p>{card.text}</p>
-      </article>
+      <div className="swipe-area">
+        <SwipeCard key={card.id} card={card} onSwipe={onAnswer} />
+      </div>
 
       <div className="actions">
         <button
           className="choice-button reject-button"
           onClick={() => onAnswer("left")}
         >
-          🙅 Não curto
+          Não curto
         </button>
 
         <button
           className="choice-button accept-button"
           onClick={() => onAnswer("right")}
         >
-          Curto 🙆‍♂️
+          Curto
         </button>
       </div>
     </section>
