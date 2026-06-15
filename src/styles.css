@@ -103,8 +103,10 @@ h1 {
   text-transform: uppercase;
 }
 
-#forja-logo {
-  width: 20rem;
+.home-logo {
+  width: min(72vw, 480px);
+  height: auto;
+  margin-bottom: 3rem;
 }
 
 .subtitle {
