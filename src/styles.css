@@ -562,6 +562,28 @@ h1 {
     box-shadow 0.12s ease;
 }
 
+.open-source-footer {
+  position: relative;
+  z-index: 2;
+  margin-top: clamp(0.5rem, 2vh, 1.5rem);
+  font-size: clamp(0.75rem, 1.6vw, 1rem);
+  opacity: 0.72;
+}
+
+.open-source-footer a {
+  color: var(--color-muted);
+  text-decoration: none;
+  transition:
+    color 0.12s ease,
+    opacity 0.12s ease;
+}
+
+.open-source-footer a:hover,
+.open-source-footer a:focus-visible {
+  color: var(--color-text);
+  opacity: 1;
+}
+
 @media (max-width: 800px) {
   .admin-stats {
     grid-template-columns: 1fr 1fr;

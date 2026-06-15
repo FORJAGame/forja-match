@@ -7,7 +7,7 @@ function StartScreen({ onStart }) {
       <HeartParticles />
 
       <div className="start-content">
-        <img className="home-logo" src={forja_logo} alt="FORJA Match"/>
+        <img className="home-logo" src={forja_logo} alt="FORJA Match" />
 
         <p className="subtitle">
           Descubra qual jogo da FORJA combina mais com você
@@ -30,6 +30,11 @@ function StartScreen({ onStart }) {
           <span className="button-spark spark-3">♥</span>
           <span className="button-spark spark-4">♥</span>
         </div>
+        <footer className="open-source-footer">
+          <a href="https://www.netlify.com/" target="_blank" rel="noreferrer">
+            This site is powered by Netlify
+          </a>
+        </footer>
       </div>
     </section>
   );
