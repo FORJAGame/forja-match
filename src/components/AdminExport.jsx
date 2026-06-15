@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { syncPendingSessions } from "../services/analytics";
 
 import {
   clearLocalSessions,
@@ -48,6 +49,11 @@ function AdminExport({ onBack }) {
     }
 
     clearLocalSessions();
+    refreshSessions();
+  }
+
+  async function handleSyncPendingSessions() {
+    await syncPendingSessions();
     refreshSessions();
   }
 
@@ -111,6 +117,14 @@ function AdminExport({ onBack }) {
           disabled={sessions.length === 0}
         >
           Exportar ranking
+        </button>
+
+        <button
+          className="primary-button"
+          onClick={handleSyncPendingSessions}
+          disabled={unsyncedSessions.length === 0}
+        >
+          Sincronizar pendentes
         </button>
 
         <button className="secondary-button" onClick={refreshSessions}>

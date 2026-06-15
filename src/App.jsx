@@ -8,7 +8,7 @@ import AdminExport from "./components/AdminExport";
 import { cards } from "./data/cards";
 import { games } from "./data/games";
 import { updatePlayerProfile, calculateMatch } from "./utils/match";
-import { saveLocalSession } from "./services/storage";
+import { saveSession, syncPendingSessions } from "./services/analytics";
 
 function createSession() {
   return {
@@ -90,7 +90,7 @@ function App() {
         },
       };
 
-      saveLocalSession(completedSession);
+      saveSession(completedSession);
 
       setCurrentSession(completedSession);
       setResult(matchResult);
@@ -125,6 +125,20 @@ function App() {
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    syncPendingSessions();
+
+    function handleOnline() {
+      syncPendingSessions();
+    }
+
+    window.addEventListener("online", handleOnline);
+
+    return () => {
+      window.removeEventListener("online", handleOnline);
     };
   }, []);
 

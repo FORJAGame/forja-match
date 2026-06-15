@@ -29,6 +29,28 @@ export function saveLocalSession(session) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedSessions));
 }
 
+export function markSessionAsSynced(sessionId) {
+  const sessions = getLocalSessions();
+
+  const updatedSessions = sessions.map((session) => {
+    if (session.id === sessionId) {
+      return {
+        ...session,
+        synced: true,
+        syncedAt: new Date().toISOString(),
+      };
+    }
+
+    return session;
+  });
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(updatedSessions));
+}
+
+export function getUnsyncedSessions() {
+  return getLocalSessions().filter((session) => !session.synced);
+}
+
 export function getLocalSessionCount() {
   return getLocalSessions().length;
 }
