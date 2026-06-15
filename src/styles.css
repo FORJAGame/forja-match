@@ -64,11 +64,13 @@ a:focus-visible {
 }
 
 img {
+  display: block;
   user-select: none;
   -webkit-user-drag: none;
 }
 
 .app {
+  position: relative;
   width: 100vw;
   height: 100vh;
   height: 100dvh;
@@ -81,6 +83,7 @@ img {
 .screen {
   width: min(100%, var(--totem-max-width));
   height: min(100%, var(--totem-max-height));
+  max-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -533,10 +536,12 @@ h1 {
 }
 
 .primary-button:disabled,
+.choice-button:disabled,
 .secondary-button:disabled,
 .danger-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+  transform: none;
 }
 
 .primary-button,
@@ -561,7 +566,7 @@ h1 {
   }
 
   .screen {
-    min-height: 100vh;
+    height: 100%;
   }
 
   .actions {
@@ -590,5 +595,16 @@ h1 {
 
   .actions {
     margin-bottom: 2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
   }
 }
