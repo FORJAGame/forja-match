@@ -608,3 +608,177 @@ h1 {
     scroll-behavior: auto !important;
   }
 }
+
+.start-screen {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.start-content {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: center;
+  gap: clamp(1.5rem, 3vh, 3rem);
+}
+
+.heart-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.heart-particle {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  color: rgba(230, 55, 46, 0.42);
+  font-size: var(--size);
+  line-height: 1;
+  opacity: 0;
+  text-shadow: 0 0 18px rgba(230, 55, 46, 0.5);
+  transform:
+    translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0.2);
+  animation: heart-warp var(--duration) linear infinite;
+  animation-delay: var(--delay);
+}
+
+@keyframes heart-warp {
+  0% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0.2);
+  }
+
+  12% {
+    opacity: 0.85;
+  }
+
+  70% {
+    opacity: 0.48;
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(5.75);
+  }
+}
+
+.start-button-wrap {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  margin-top: clamp(0.5rem, 2vh, 1.5rem);
+}
+
+.start-button {
+  position: relative;
+  z-index: 3;
+  animation: start-button-pulse 1.65s ease-in-out infinite;
+}
+
+@keyframes start-button-pulse {
+
+  0%,
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 32px rgba(230, 55, 46, 0.35);
+  }
+
+  50% {
+    transform: scale(1.045);
+    box-shadow:
+      0 0 42px rgba(230, 55, 46, 0.55),
+      0 0 90px rgba(230, 55, 46, 0.18);
+  }
+}
+
+.button-pulse {
+  position: absolute;
+  inset: -12px;
+  z-index: 1;
+  border: 2px solid rgba(230, 55, 46, 0.45);
+  border-radius: 999px;
+  opacity: 0;
+  animation: button-pulse-ring 1.9s ease-out infinite;
+}
+
+.button-pulse-2 {
+  animation-delay: 0.95s;
+}
+
+@keyframes button-pulse-ring {
+  0% {
+    opacity: 0.72;
+    transform: scale(0.94);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(1.32);
+  }
+}
+
+.button-spark {
+  position: absolute;
+  z-index: 4;
+  color: var(--color-red);
+  font-size: 1.25rem;
+  line-height: 1;
+  pointer-events: none;
+  text-shadow: 0 0 14px rgba(230, 55, 46, 0.75);
+  animation: button-heart-float 2.2s ease-in-out infinite;
+}
+
+.spark-1 {
+  left: -2.2rem;
+  top: 10%;
+  animation-delay: 0s;
+}
+
+.spark-2 {
+  right: -2.4rem;
+  top: 18%;
+  animation-delay: 0.45s;
+}
+
+.spark-3 {
+  left: 12%;
+  bottom: -1.8rem;
+  animation-delay: 0.9s;
+}
+
+.spark-4 {
+  right: 14%;
+  bottom: -2rem;
+  animation-delay: 1.25s;
+}
+
+@keyframes button-heart-float {
+
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0) scale(1.85) rotate(-8deg);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-14px) scale(3.2) rotate(8deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .heart-particle,
+  .start-button,
+  .button-pulse,
+  .button-spark {
+    animation: none !important;
+  }
+}
