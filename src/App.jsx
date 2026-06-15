@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import StartScreen from "./components/StartScreen";
 import GameScreen from "./components/GameScreen";
 import ResultScreen from "./components/ResultScreen";
+import AdminExport from "./components/AdminExport";
 
 import { cards } from "./data/cards";
 import { games } from "./data/games";
@@ -17,7 +18,7 @@ function createSession() {
     finishedAt: null,
     completed: false,
     answers: [],
-    result: null
+    result: null,
   };
 }
 
@@ -27,7 +28,10 @@ function getKioskId() {
 }
 
 function App() {
-  const [screen, setScreen] = useState("start");
+  const [screen, setScreen] = useState(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get("admin") === "1" ? "admin" : "start";
+  });
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [playerProfile, setPlayerProfile] = useState({});
   const [answers, setAnswers] = useState([]);
@@ -56,7 +60,7 @@ function App() {
       cardId: card.id,
       cardText: card.text,
       direction,
-      answeredAt: new Date().toISOString()
+      answeredAt: new Date().toISOString(),
     };
 
     const updatedAnswers = [...answers, answer];
@@ -81,9 +85,9 @@ function App() {
           ranking: matchResult.ranking.map((item) => ({
             gameId: item.game.id,
             gameName: item.game.name,
-            score: item.score
-          }))
-        }
+            score: item.score,
+          })),
+        },
       };
 
       saveLocalSession(completedSession);
@@ -107,6 +111,23 @@ function App() {
     setCurrentSession(null);
   }
 
+  useEffect(() => {
+    function handleKeyDown(event) {
+      const isAdminShortcut =
+        event.ctrlKey && event.shiftKey && event.key.toLowerCase() === "a";
+
+      if (isAdminShortcut) {
+        setScreen("admin");
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   return (
     <main className="app">
       {screen === "start" && <StartScreen onStart={startGame} />}
@@ -128,6 +149,9 @@ function App() {
           onRestart={restartGame}
         />
       )}
+
+      {screen === "admin" && <AdminExport onBack={() => setScreen("start")} />}
+      
     </main>
   );
 }
