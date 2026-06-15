@@ -69,26 +69,3 @@ node -v
 npm -v
 git --version
 ```
-
----
-
-## Checklist de entrega
-
-* [ ] Projeto criado com Vite + React;
-* [ ] Motion instalado e funcionando;
-* [ ] Firebase configurado;
-* [ ] Netlify configurado;
-* [ ] Cards cadastrados;
-* [ ] Jogos cadastrados;
-* [ ] Tela inicial pronta;
-* [ ] Tela de jogo pronta;
-* [ ] Swipe funcionando;
-* [ ] Botões funcionando;
-* [ ] Algoritmo de match funcionando;
-* [ ] Tela de resultado pronta;
-* [ ] Estatísticas salvas localmente;
-* [ ] Estatísticas enviadas ao Firebase;
-* [ ] Exportação CSV funcionando;
-* [ ] Teste em tela touch realizado;
-* [ ] Teste sem internet realizado;
-* [ ] Deploy final realizado.
