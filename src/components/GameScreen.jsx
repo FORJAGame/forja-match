@@ -1,4 +1,5 @@
 import SwipeCard from "./SwipeCard";
+import forja_logo from "/forja_match_logo.png";
 
 function GameScreen({ card, currentIndex, totalCards, onAnswer }) {
   const progress = currentIndex + 1;
@@ -6,16 +7,22 @@ function GameScreen({ card, currentIndex, totalCards, onAnswer }) {
   return (
     <section className="screen game-screen">
       <header className="game-header">
-        <span>
-          Frase {progress} de {totalCards}
-        </span>
+        <img className="screen-logo" src={forja_logo} alt="FORJA Match"/>
 
-        <div className="progress-bar">
-          <div
-            className="progress-bar-fill"
-            style={{ width: `${(progress / totalCards) * 100}%` }}
-          />
+        <div className="progress-info">
+          <span>
+            Frase {progress} de {totalCards}
+          </span>
+
+          <div className="progress-bar">
+            <div
+              className="progress-bar-fill"
+              style={{ width: `${(progress / totalCards) * 100}%` }}
+            />
+          </div>
         </div>
+
+        <p className="swipe-hint">Arraste o card ou use os botões abaixo</p>
       </header>
 
       <div className="swipe-area">
@@ -27,14 +34,14 @@ function GameScreen({ card, currentIndex, totalCards, onAnswer }) {
           className="choice-button reject-button"
           onClick={() => onAnswer("left")}
         >
-          Não curto
+          Não é minha vibe
         </button>
 
         <button
           className="choice-button accept-button"
           onClick={() => onAnswer("right")}
         >
-          Curto
+          Dá match
         </button>
       </div>
     </section>
