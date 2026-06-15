@@ -8,8 +8,8 @@ function SwipeCard({ card, onSwipe }) {
   const rejectOpacity = useTransform(x, [-150, -40], [1, 0]);
 
   function handleDragEnd(event, info) {
-    const swipeThreshold = 120;
-    const velocityThreshold = 700;
+    const swipeThreshold = 180;
+    const velocityThreshold = 800;
 
     if (info.offset.x > swipeThreshold || info.velocity.x > velocityThreshold) {
       onSwipe("right");
