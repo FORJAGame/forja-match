@@ -1,4 +1,4 @@
-import forja_logo from "../assets/forja_match_logo.png";
+import forja_logo from "/forja_match_logo.png";
 
 function StartScreen({ onStart }) {
   return (
