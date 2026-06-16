@@ -4,7 +4,7 @@ import { useGLTF, OrbitControls, Environment, Center } from "@react-three/drei";
 
 function Model() {
   const groupRef = useRef();
-  const { scene } = useGLTF("/FORJAHub.glb");
+  const { scene } = useGLTF("/FORJAmatch.glb");
 
   const prefersReducedMotion =
     typeof window !== "undefined" &&
