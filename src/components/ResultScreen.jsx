@@ -1,3 +1,4 @@
+import { QRCodeSVG } from "qrcode.react";
 import forja_logo from "/forja_match_logo.png";
 
 function ResultScreen({ result, answers, session, onRestart }) {
@@ -29,39 +30,26 @@ function ResultScreen({ result, answers, session, onRestart }) {
             <span>{game.whereToPlay}</span>
           </p>
 
-          <p>
-            <strong>Onde encontrar a FORJA</strong>
-            <span>{game.standLocation}</span>
-          </p>
-
           {game.socialUrl && (
-            <p>
+            <p className="result-social">
               <strong>Siga o jogo</strong>
-              <a href={game.socialUrl} target="_blank" rel="noreferrer">
-                Acompanhar nas redes sociais
-              </a>
+              <span className="result-social-hint">
+                Aponte a câmera para acompanhar nas redes sociais
+              </span>
+              <span className="social-qr">
+                <QRCodeSVG
+                  value={game.socialUrl}
+                  size={256}
+                  level="M"
+                  marginSize={0}
+                  bgColor="#ffffff"
+                  fgColor="#111111"
+                />
+              </span>
             </p>
           )}
         </div>
       </div>
-
-      {shouldShowDebug && (
-        <div className="debug-result">
-          <p>
-            Pontuação do match: <strong>{result.score}</strong>
-          </p>
-
-          <p>
-            Respostas registradas: <strong>{answers.length}</strong>
-          </p>
-
-          {session && (
-            <p>
-              Sessão salva localmente: <strong>{session.id}</strong>
-            </p>
-          )}
-        </div>
-      )}
 
       <button className="primary-button" onClick={onRestart}>
         Jogar novamente
