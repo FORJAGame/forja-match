@@ -7,8 +7,10 @@ import AdminExport from "./components/AdminExport";
 
 import { cards } from "./data/cards";
 import { games } from "./data/games";
+import { getKioskId } from "./services/storage";
 import { updatePlayerProfile, calculateMatch } from "./utils/match";
 import { saveSession, syncPendingSessions } from "./services/analytics";
+
 
 function createSession() {
   return {
@@ -20,11 +22,6 @@ function createSession() {
     answers: [],
     result: null,
   };
-}
-
-function getKioskId() {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("kiosk") || "totem_01";
 }
 
 function App() {

@@ -43,8 +43,16 @@ body {
   overflow-y: auto;
   font-family: Arial, Helvetica, sans-serif;
   background:
-    radial-gradient(circle at 76% 4%, rgba(230, 55, 46, 0.18), transparent 28rem),
-    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.025), transparent 36rem),
+    radial-gradient(
+      circle at 76% 4%,
+      rgba(230, 55, 46, 0.18),
+      transparent 28rem
+    ),
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(255, 255, 255, 0.025),
+      transparent 36rem
+    ),
     var(--color-background);
   color: var(--color-text);
   user-select: none;
@@ -243,7 +251,11 @@ h1 {
   z-index: 0;
   border-radius: inherit;
   background:
-    radial-gradient(circle at 80% 10%, rgba(230, 55, 46, 0.26), transparent 30%),
+    radial-gradient(
+      circle at 80% 10%,
+      rgba(230, 55, 46, 0.26),
+      transparent 30%
+    ),
     linear-gradient(145deg, rgba(255, 255, 255, 0.12), transparent 42%);
   opacity: 0.9;
   pointer-events: none;
@@ -413,7 +425,7 @@ h1 {
   pointer-events: none;
 }
 
-.result-card>* {
+.result-card > * {
   position: relative;
   z-index: 1;
 }
@@ -504,31 +516,127 @@ h1 {
 }
 
 .admin-screen {
-  gap: 1.5rem;
+  width: min(100%, 900px);
+  max-height: calc(100dvh - (var(--app-padding) * 2));
+  align-self: stretch;
+  gap: 1rem;
   overflow-y: auto;
-  padding-block: 2rem;
+  padding-block: 1.5rem;
+  padding-inline: 0.25rem;
+  scrollbar-width: thin;
+}
+
+.admin-header {
+  width: min(100%, 760px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  text-align: left;
+}
+
+.admin-header h1 {
+  font-size: clamp(2.2rem, 7vw, 4.6rem);
+}
+
+.admin-label {
+  margin: 0 0 0.35rem;
+  color: var(--color-red);
+  font-size: 0.9rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.admin-panel {
+  width: min(100%, 760px);
+  display: grid;
+  gap: 0.9rem;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+  border-radius: 24px;
+  background: var(--color-surface);
+  text-align: left;
+}
+
+.admin-panel h2 {
+  margin: 0;
+  font-size: clamp(1.15rem, 3vw, 1.5rem);
+}
+
+.admin-help {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.admin-help strong {
+  color: var(--color-text);
+}
+
+.kiosk-form {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.kiosk-form label {
+  color: var(--color-muted);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.kiosk-input-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.6rem;
+}
+
+.kiosk-input-row input {
+  width: 100%;
+  min-height: 50px;
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  padding: 0.75rem 1rem;
+  background: var(--color-surface-light);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 1rem;
+}
+
+.kiosk-input-row input:focus-visible {
+  outline: 3px solid var(--color-red);
+  outline-offset: 3px;
+}
+
+.admin-actions {
+  width: min(100%, 760px);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.admin-small-button {
+  min-height: 48px;
+  padding: 0.7rem 1rem;
+  font-size: clamp(0.78rem, 2vw, 0.95rem);
+  line-height: 1.15;
+}
+
+.admin-stats {
+  width: min(100%, 760px);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.admin-stats div {
+  min-height: 50px;
 }
 
 .admin-screen h1 {
   font-size: clamp(2.4rem, 7vw, 5rem);
-}
-
-.admin-stats {
-  width: min(100%, 720px);
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0.8rem;
-}
-
-.admin-stats div {
-  min-height: 120px;
-  display: grid;
-  place-items: center;
-  gap: 0.4rem;
-  padding: 1rem;
-  border-radius: 20px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
 }
 
 .admin-stats strong {
@@ -540,12 +648,7 @@ h1 {
   color: var(--color-muted);
   font-size: 0.9rem;
   line-height: 1.2;
-}
-
-.admin-actions {
-  width: min(100%, 620px);
-  display: grid;
-  gap: 0.8rem;
+  margin-left: 5px;
 }
 
 .secondary-button,
@@ -609,12 +712,6 @@ h1 {
   opacity: 1;
 }
 
-@media (max-width: 800px) {
-  .admin-stats {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
 @media (max-width: 700px) {
   :root {
     --app-padding: 1rem;
@@ -661,7 +758,30 @@ h1 {
   }
 
   .admin-stats {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .admin-screen {
+    max-height: none;
+    align-self: auto;
+  }
+
+  .admin-header {
+    align-items: stretch;
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .admin-panel {
+    text-align: center;
+  }
+
+  .kiosk-input-row {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-actions {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -720,7 +840,6 @@ h1 {
 }
 
 @media (min-width: 900px) and (min-height: 1600px) {
-
   html,
   body,
   #root {
@@ -772,6 +891,13 @@ h1 {
 
   .actions {
     margin-bottom: 2rem;
+  }
+
+  .admin-screen {
+    height: 100%;
+    max-height: 100%;
+    overflow-y: auto;
+    padding-block: 2rem;
   }
 }
 
@@ -830,8 +956,7 @@ h1 {
   line-height: 1;
   opacity: 0;
   text-shadow: 0 0 18px rgba(230, 55, 46, 0.5);
-  transform:
-    translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0.2);
+  transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0.2);
   animation: heart-warp var(--duration) linear infinite;
   animation-delay: var(--delay);
 }
@@ -839,8 +964,8 @@ h1 {
 @keyframes heart-warp {
   0% {
     opacity: 0;
-    transform:
-      translate(-50%, -50%) rotate(var(--angle)) translateX(0) scale(0.2);
+    transform: translate(-50%, -50%) rotate(var(--angle)) translateX(0)
+      scale(0.2);
   }
 
   12% {
@@ -853,8 +978,8 @@ h1 {
 
   100% {
     opacity: 0;
-    transform:
-      translate(-50%, -50%) rotate(var(--angle)) translateX(var(--distance)) scale(5.75);
+    transform: translate(-50%, -50%) rotate(var(--angle))
+      translateX(var(--distance)) scale(5.75);
   }
 }
 
@@ -873,7 +998,6 @@ h1 {
 }
 
 @keyframes start-button-pulse {
-
   0%,
   100% {
     transform: scale(1);
@@ -950,7 +1074,6 @@ h1 {
 }
 
 @keyframes button-heart-float {
-
   0%,
   100% {
     opacity: 0.25;

@@ -1,55 +1,68 @@
-import { useState } from "react";
-import { syncPendingSessions } from "../services/analytics";
-
+import { useEffect, useMemo, useState } from "react";
 import {
   clearLocalSessions,
-  getLocalSessions
+  getKioskId,
+  getLocalSessions,
+  setKioskId,
 } from "../services/storage";
-
+import { syncPendingSessions } from "../services/analytics";
 import {
   exportAnswersCSV,
   exportRankingCSV,
-  exportSessionsCSV
+  exportSessionsCSV,
 } from "../utils/csv";
 
 function AdminExport({ onBack }) {
-  const [sessions, setSessions] = useState(getLocalSessions());
+  const [sessions, setSessions] = useState(() => getLocalSessions());
+  const [currentKioskId, setCurrentKioskId] = useState(() => getKioskId());
+  const [kioskInput, setKioskInput] = useState(() => getKioskId());
+  const [isFullscreen, setIsFullscreen] = useState(() =>
+    Boolean(document.fullscreenElement),
+  );
 
-  const completedSessions = sessions.filter((session) => session.completed);
-  const syncedSessions = sessions.filter((session) => session.synced);
-  const unsyncedSessions = sessions.filter((session) => !session.synced);
+  const stats = useMemo(() => {
+    const completedSessions = sessions.filter((session) => session.completed);
+    const syncedSessions = sessions.filter((session) => session.synced);
+    const pendingSessions = sessions.filter((session) => !session.synced);
 
-  const totalAnswers = sessions.reduce((total, session) => {
-    return total + session.answers.length;
-  }, 0);
+    const totalAnswers = sessions.reduce((total, session) => {
+      return total + (session.answers?.length || 0);
+    }, 0);
+
+    return {
+      totalSessions: sessions.length,
+      completedSessions: completedSessions.length,
+      totalAnswers,
+      syncedSessions: syncedSessions.length,
+      pendingSessions: pendingSessions.length,
+    };
+  }, [sessions]);
+
+  useEffect(() => {
+    function handleFullscreenChange() {
+      setIsFullscreen(Boolean(document.fullscreenElement));
+    }
+
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
+
+    return () => {
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+    };
+  }, []);
 
   function refreshSessions() {
     setSessions(getLocalSessions());
+    setCurrentKioskId(getKioskId());
+    setKioskInput(getKioskId());
   }
 
-  function handleExportSessions() {
-    exportSessionsCSV(sessions);
-  }
+  function handleSaveKioskId(event) {
+    event.preventDefault();
 
-  function handleExportAnswers() {
-    exportAnswersCSV(sessions);
-  }
+    const savedKioskId = setKioskId(kioskInput);
 
-  function handleExportRanking() {
-    exportRankingCSV(sessions);
-  }
-
-  function handleClearSessions() {
-    const confirmed = window.confirm(
-      "Tem certeza que deseja apagar todos os dados locais deste navegador?"
-    );
-
-    if (!confirmed) {
-      return;
-    }
-
-    clearLocalSessions();
-    refreshSessions();
+    setCurrentKioskId(savedKioskId);
+    setKioskInput(savedKioskId);
   }
 
   async function handleSyncPendingSessions() {
@@ -57,88 +70,161 @@ function AdminExport({ onBack }) {
     refreshSessions();
   }
 
+  function handleClearLocalSessions() {
+    const shouldClear = window.confirm(
+      "Tem certeza que deseja apagar os dados locais deste navegador?",
+    );
+
+    if (!shouldClear) return;
+
+    clearLocalSessions();
+    refreshSessions();
+  }
+
+  async function handleToggleFullscreen() {
+    try {
+      if (!document.fullscreenElement) {
+        await document.documentElement.requestFullscreen();
+        return;
+      }
+
+      await document.exitFullscreen();
+    } catch (error) {
+      console.error("Erro ao alternar tela cheia:", error);
+      alert(
+        "Não foi possível ativar a tela cheia. Tente novamente pelo navegador do totem.",
+      );
+    }
+  }
+
   return (
     <section className="screen admin-screen">
-      <div className="brand-mark">ADMIN</div>
-
-      <h1>Dados locais</h1>
-
-      <p className="instructions">
-        Esta tela permite exportar as estatísticas salvas neste navegador.
-      </p>
-
-      <div className="admin-stats">
+      <div className="admin-header">
         <div>
-          <strong>{sessions.length}</strong>
-          <span>Sessões salvas</span>
+          <p className="admin-label">FORJA Match</p>
+          <h1>Admin</h1>
+        </div>
+
+        <button
+          className="secondary-button admin-small-button"
+          onClick={onBack}
+        >
+          Voltar
+        </button>
+      </div>
+
+      <section className="admin-panel">
+        <h2>Configuração do totem</h2>
+
+        <form className="kiosk-form" onSubmit={handleSaveKioskId}>
+          <label htmlFor="kioskId">Nome do totem atual</label>
+
+          <div className="kiosk-input-row">
+            <input
+              id="kioskId"
+              type="text"
+              value={kioskInput}
+              onChange={(event) => setKioskInput(event.target.value)}
+              placeholder="Ex.: totem_01"
+            />
+
+            <button
+              className="secondary-button admin-small-button"
+              type="submit"
+            >
+              Salvar
+            </button>
+          </div>
+        </form>
+
+        <p className="admin-help">
+          Totem atual: <strong>{currentKioskId}</strong>. As próximas sessões
+          serão registradas com esse identificador.
+        </p>
+
+        <button
+          className="secondary-button admin-small-button"
+          onClick={handleToggleFullscreen}
+        >
+          {isFullscreen ? "⛶ Sair da tela cheia" : "⛶ Ativar tela cheia"}
+        </button>
+      </section>
+
+      <section className="admin-stats">
+        <div>
+          <strong>{stats.totalSessions}</strong>
+          <span>Sessões locais</span>
         </div>
 
         <div>
-          <strong>{completedSessions.length}</strong>
-          <span>Sessões concluídas</span>
+          <strong>{stats.completedSessions}</strong>
+          <span>Concluídas</span>
         </div>
 
         <div>
-          <strong>{totalAnswers}</strong>
-          <span>Respostas registradas</span>
+          <strong>{stats.totalAnswers}</strong>
+          <span>Respostas</span>
         </div>
 
         <div>
-          <strong>{syncedSessions.length}</strong>
+          <strong>{stats.syncedSessions}</strong>
           <span>Sincronizadas</span>
         </div>
 
         <div>
-          <strong>{unsyncedSessions.length}</strong>
+          <strong>{stats.pendingSessions}</strong>
           <span>Pendentes</span>
         </div>
-      </div>
+      </section>
 
-      <div className="admin-actions">
+      <section className="admin-actions">
         <button
-          className="primary-button"
-          onClick={handleExportSessions}
+          className="secondary-button admin-small-button"
+          onClick={() => exportSessionsCSV(sessions)}
           disabled={sessions.length === 0}
         >
           Exportar sessões
         </button>
 
         <button
-          className="primary-button"
-          onClick={handleExportAnswers}
+          className="secondary-button admin-small-button"
+          onClick={() => exportAnswersCSV(sessions)}
           disabled={sessions.length === 0}
         >
           Exportar respostas
         </button>
 
         <button
-          className="primary-button"
-          onClick={handleExportRanking}
+          className="secondary-button admin-small-button"
+          onClick={() => exportRankingCSV(sessions)}
           disabled={sessions.length === 0}
         >
           Exportar ranking
         </button>
 
         <button
-          className="primary-button"
+          className="secondary-button admin-small-button"
           onClick={handleSyncPendingSessions}
-          disabled={unsyncedSessions.length === 0}
+          disabled={stats.pendingSessions === 0}
         >
           Sincronizar pendentes
         </button>
 
-        <button className="secondary-button" onClick={refreshSessions}>
+        <button
+          className="secondary-button admin-small-button"
+          onClick={refreshSessions}
+        >
           Atualizar dados
         </button>
 
-        <button className="danger-button" onClick={handleClearSessions}>
+        <button
+          className="danger-button admin-small-button"
+          onClick={handleClearLocalSessions}
+          disabled={sessions.length === 0}
+        >
           Limpar dados locais
         </button>
-
-        <button className="secondary-button" onClick={onBack}>
-          Voltar
-        </button>
-      </div>
+      </section>
     </section>
   );
 }

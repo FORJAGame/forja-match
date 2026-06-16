@@ -1,4 +1,5 @@
 const STORAGE_KEY = "forja_match_sessions";
+const KIOSK_ID_KEY = "forja_match_kiosk_id";
 
 export function getLocalSessions() {
   const storedSessions = localStorage.getItem(STORAGE_KEY);
@@ -57,4 +58,24 @@ export function getLocalSessionCount() {
 
 export function clearLocalSessions() {
   localStorage.removeItem(STORAGE_KEY);
+}
+
+export function getKioskId() {
+  const params = new URLSearchParams(window.location.search);
+  const kioskIdFromUrl = params.get("kiosk");
+
+  if (kioskIdFromUrl) {
+    localStorage.setItem(KIOSK_ID_KEY, kioskIdFromUrl);
+    return kioskIdFromUrl;
+  }
+
+  return localStorage.getItem(KIOSK_ID_KEY) || "totem_01";
+}
+
+export function setKioskId(kioskId) {
+  const sanitizedKioskId = kioskId.trim() || "totem_01";
+
+  localStorage.setItem(KIOSK_ID_KEY, sanitizedKioskId);
+
+  return sanitizedKioskId;
 }
