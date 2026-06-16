@@ -89,4 +89,21 @@ export const games = [
     //image: "/assets/games/lost_fields.png",
     image: "https://placehold.co/1920x1080",
   },
+  {
+    id: "deco_dica",
+    name: "DECO DICA",
+    description: "Um jogo de cartas para quem quer se divertir com a galera",
+    tags: {
+      social: 2,
+      humor: 2,
+      competicao: 2,
+      acessivel: 1,
+      ritmo_rapido: 1,
+    },
+    whereToPlay: "Jogue no espaço de demonstração da FORJA",
+    standLocation: "Encontre a FORJA no estande principal",
+    socialUrl: "",
+    //image: "/assets/games/lost_fields.png",
+    image: "https://placehold.co/1920x1080",
+  },
 ];
