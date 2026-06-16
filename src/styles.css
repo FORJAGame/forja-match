@@ -764,6 +764,24 @@ h1 {
   gap: clamp(1.5rem, 3vh, 3rem);
 }
 
+.cartridge-canvas {
+  width: 100%;
+  height: clamp(300px, 45vh, 600px);
+  cursor: grab;
+  touch-action: none;
+  z-index: 2;
+}
+
+.cartridge-canvas:active {
+  cursor: grabbing;
+}
+
+.cartridge-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .heart-particles {
   position: absolute;
   inset: 0;

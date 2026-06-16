@@ -1,4 +1,5 @@
 import HeartParticles from "./HeartParticles";
+import CartuchoFORJA from "./CartuchoFORJA";
 import forja_logo from "/forja_match_logo.png";
 
 function StartScreen({ onStart }) {
@@ -8,6 +9,8 @@ function StartScreen({ onStart }) {
 
       <div className="start-content">
         <img className="home-logo" src={forja_logo} alt="FORJA Match" />
+
+        <CartuchoFORJA />
 
         <p className="subtitle">
           Descubra qual jogo da FORJA combina mais com você
