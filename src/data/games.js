@@ -33,7 +33,7 @@ export const games = [
     standLocation: "Encontre a FORJA no estande principal",
     socialUrl: "",
     //image: "/assets/games/ismalia.png",
-    image: "https://placehold.co/260x615",
+    image: "https://placehold.co/1920x1080",
   },
   {
     id: "the_party_of_losers",
@@ -51,7 +51,7 @@ export const games = [
     standLocation: "Encontre a FORJA no estande principal",
     socialUrl: "",
     //image: "/assets/games/the-party-of-losers.png",
-    image: "https://placehold.co/260x615",
+    image: "https://placehold.co/1920x1080",
   },
   {
     id: "mortis_pactum",
@@ -69,7 +69,7 @@ export const games = [
     standLocation: "Encontre a FORJA no estande principal",
     socialUrl: "",
     //image: "/assets/games/mortis-pactum.png",
-    image: "https://placehold.co/260x615",
+    image: "https://placehold.co/1920x1080",
   },
   {
     id: "lost_fields",
