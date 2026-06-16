@@ -71,4 +71,22 @@ export const games = [
     //image: "/assets/games/mortis-pactum.png",
     image: "https://placehold.co/260x615",
   },
+  {
+    id: "lost_fields",
+    name: "Lost Fields",
+    description:
+      "Um jogo para quem gosta de se aventurar por narrativas densas",
+    tags: {
+      tensao: 2,
+      estrategia: 2,
+      terror: 2,
+      narrativa: 1,
+      exploracao: 1,
+    },
+    whereToPlay: "Jogue no espaço de demonstração da FORJA",
+    standLocation: "Encontre a FORJA no estande principal",
+    socialUrl: "",
+    //image: "/assets/games/lost_fields.png",
+    image: "https://placehold.co/1920x1080",
+  },
 ];
