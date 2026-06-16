@@ -1,41 +1,5 @@
 export const games = [
   {
-    id: "beyond_the_train",
-    name: "Beyond the Train",
-    description:
-      "Um jogo para quem curte exploração, narrativa e uma experiência mais atmosférica",
-    tags: {
-      narrativa: 2,
-      exploracao: 2,
-      atmosfera: 2,
-      ritmo_calmo: 1,
-      puzzle: 1,
-    },
-    whereToPlay: "Jogue no espaço de demonstração da FORJA",
-    standLocation: "Encontre a FORJA no estande principal",
-    socialUrl: "",
-    //image: "/assets/games/beyond-the-train.png",
-    image: "https://placehold.co/260x615",
-  },
-  {
-    id: "punch_throw_score",
-    name: "Punch! Throw!! Score!!!",
-    description:
-      "Um jogo para quem gosta de ação, disputa, partidas rápidas e caos divertido",
-    tags: {
-      acao: 2,
-      competicao: 2,
-      ritmo_rapido: 2,
-      desafio: 1,
-      social: 1,
-    },
-    whereToPlay: "Jogue no espaço de demonstração da FORJA",
-    standLocation: "Encontre a FORJA no estande principal",
-    socialUrl: "",
-    //image: "/assets/games/punch-throw-score.png",
-    image: "https://placehold.co/260x615",
-  },
-  {
     id: "you_are_gonna_be_late",
     name: "You're Gonna Be Late",
     description:
