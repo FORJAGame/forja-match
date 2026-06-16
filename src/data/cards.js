@@ -32,6 +32,7 @@ export const cards = [
     tags: {
       humor: 2,
       experimental: 2,
+      metalinguagem: 2,
       surpresa: 1,
     },
   },
@@ -77,6 +78,7 @@ export const cards = [
     tags: {
       arte: 2,
       atmosfera: 1,
+      nostalgia: 1,
       experimental: 1,
     },
   },
