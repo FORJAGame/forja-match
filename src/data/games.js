@@ -69,8 +69,7 @@ export const games = [
     whereToPlay: "Jogue no espaço da FORJA na sala 102 do prédio Brum",
     standLocation: "Encontre a FORJA no estande principal",
     socialUrl: "https://www.instagram.com/mortispactum/",
-    //image: "/assets/games/mortis-pactum.png",
-    image: "https://placehold.co/1920x1080",
+    image: "/assets/games/mortis-pactum.png",
   },
   {
     id: "lost_fields",
