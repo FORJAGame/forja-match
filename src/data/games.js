@@ -106,4 +106,21 @@ export const games = [
     //image: "/assets/games/lost_fields.png",
     image: "https://placehold.co/1920x1080",
   },
+  {
+    id: "ecos_da_mata",
+    name: "Ecos da Mata",
+    description: "Um jogo sobre...",
+    tags: {
+      social: 2,
+      humor: 2,
+      competicao: 2,
+      acessivel: 1,
+      ritmo_rapido: 1,
+    },
+    whereToPlay: "Jogue no espaço da FORJA na sala 102 do prédio Brum",
+    standLocation: "Encontre a FORJA no estande principal",
+    socialUrl: "",
+    //image: "/assets/games/lost_fields.png",
+    image: "https://placehold.co/1920x1080",
+  },
 ];
