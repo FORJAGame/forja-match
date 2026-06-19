@@ -712,6 +712,91 @@ h1 {
   opacity: 1;
 }
 
+.fullscreen-button {
+  position: fixed;
+  right: clamp(0.8rem, 2vw, 1.5rem);
+  bottom: clamp(0.8rem, 2vw, 1.5rem);
+  z-index: 10;
+  width: 48px;
+  min-width: 48px;
+  height: 48px;
+  min-height: 48px;
+  display: inline-grid;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  padding: 0;
+  background: rgba(27, 27, 27, 0.58);
+  color: var(--color-text);
+  cursor: pointer;
+  font-size: 0;
+  opacity: 0.58;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  transition:
+    opacity 0.12s ease,
+    transform 0.12s ease,
+    background 0.12s ease,
+    border-color 0.12s ease;
+}
+
+.fullscreen-button::before,
+.fullscreen-button::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  pointer-events: none;
+}
+
+.fullscreen-button::before {
+  clip-path: polygon(
+    0 0,
+    44% 0,
+    44% 12%,
+    12% 12%,
+    12% 44%,
+    0 44%,
+    0 0,
+    56% 0,
+    100% 0,
+    100% 44%,
+    88% 44%,
+    88% 12%,
+    56% 12%
+  );
+}
+
+.fullscreen-button::after {
+  clip-path: polygon(
+    0 56%,
+    12% 56%,
+    12% 88%,
+    44% 88%,
+    44% 100%,
+    0 100%,
+    0 56%,
+    56% 88%,
+    88% 88%,
+    88% 56%,
+    100% 56%,
+    100% 100%,
+    56% 100%
+  );
+}
+
+.fullscreen-button:hover,
+.fullscreen-button:focus-visible {
+  opacity: 1;
+  background: rgba(37, 37, 37, 0.82);
+  border-color: rgba(255, 255, 255, 0.32);
+}
+
+.fullscreen-button:active {
+  transform: scale(0.94);
+}
+
 @media (max-width: 700px) {
   :root {
     --app-padding: 1rem;
