@@ -102,9 +102,8 @@ export const games = [
     },
     whereToPlay: "Jogue no espaço da FORJA na sala 102 do prédio Brum",
     standLocation: "Encontre a FORJA no estande principal",
-    socialUrl: "",
-    //image: "/assets/games/lost_fields.png",
-    image: "https://placehold.co/1920x1080",
+    socialUrl: "https://www.instagram.com/deco.dica/",
+    image: "/assets/games/deco-dica.png",
   },
   {
     id: "ecos_da_mata",
