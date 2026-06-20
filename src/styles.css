@@ -495,7 +495,9 @@ h1 {
   border-radius: 20px;
 }
 
-.social-qr svg {
+.social-qr svg,
+.social-qr canvas,
+.social-qr img {
   display: block;
   width: clamp(160px, 22vw, 256px);
   height: auto;

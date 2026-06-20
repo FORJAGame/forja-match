@@ -1,4 +1,4 @@
-import { QRCodeSVG } from "qrcode.react";
+import CachedQRCode from "./CachedQRCode";
 import forja_logo from "/forja_match_logo.png";
 
 function ResultScreen({ result, onRestart }) {
@@ -36,13 +36,14 @@ function ResultScreen({ result, onRestart }) {
                 Aponte a câmera para acompanhar nas redes sociais
               </span>
               <span className="social-qr">
-                <QRCodeSVG
+                <CachedQRCode
                   value={game.socialUrl}
                   size={256}
                   level="M"
                   marginSize={0}
                   bgColor="#ffffff"
                   fgColor="#111111"
+                  alt={`QR Code para acompanhar ${game.name} nas redes sociais`}
                 />
               </span>
             </p>

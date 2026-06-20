@@ -61,4 +61,6 @@ function CartuchoFORJA() {
   );
 }
 
+useGLTF.preload("/FORJAmatch.glb");
+
 export default CartuchoFORJA;
