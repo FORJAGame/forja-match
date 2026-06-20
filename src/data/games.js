@@ -39,19 +39,19 @@ export const games = [
     id: "the_party_of_losers",
     name: "The Party of Losers",
     description:
-      "Um jogo para quem gosta de humor, interação social e situações absurdas",
+      "Um jogo para quem gosta de uma aventura com muito humor e situações absurdas",
     tags: {
-      humor: 2,
-      social: 2,
+      humor: 3,
+      exploracao: 2,
+      narrativa: 2,
       surpresa: 1,
-      acessivel: 1,
       experimental: 1,
+      arte: 1,
     },
     whereToPlay: "Jogue no espaço da FORJA na sala 102 do prédio Brum",
     standLocation: "Encontre a FORJA no estande principal",
     socialUrl: "",
-    //image: "/assets/games/the-party-of-losers.png",
-    image: "https://placehold.co/1920x1080",
+    image: "/assets/games/the-party-of-losers.png",
   },
   {
     id: "mortis_pactum",
@@ -105,7 +105,7 @@ export const games = [
     socialUrl: "https://www.instagram.com/deco.dica/",
     image: "/assets/games/deco-dica.png",
   },
-  {
+  /*{
     id: "ecos_da_mata",
     name: "Ecos da Mata",
     description: "Um jogo sobre...",
@@ -121,5 +121,5 @@ export const games = [
     socialUrl: "",
     //image: "/assets/games/lost_fields.png",
     image: "https://placehold.co/1920x1080",
-  },
+  },*/
 ];
