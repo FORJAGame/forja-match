@@ -32,8 +32,7 @@ export const games = [
     whereToPlay: "Jogue no espaço da FORJA na sala 102 do prédio Brum",
     standLocation: "Encontre a FORJA no estande principal",
     socialUrl: "https://www.instagram.com/ismaliagame/",
-    //image: "/assets/games/ismalia.png",
-    image: "https://i.ibb.co/G4Xt4H2N/Ism-lia.png",
+    image: "/assets/games/ismalia.png",
   },
   {
     id: "the_party_of_losers",
