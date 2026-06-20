@@ -1,9 +1,8 @@
 import { QRCodeSVG } from "qrcode.react";
 import forja_logo from "/forja_match_logo.png";
 
-function ResultScreen({ result, answers, session, onRestart }) {
+function ResultScreen({ result, onRestart }) {
   const game = result.game;
-  const shouldShowDebug = import.meta.env.DEV;
 
   return (
     <section className="screen result-screen">
