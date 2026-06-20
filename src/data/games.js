@@ -49,7 +49,7 @@ export const games = [
     },
     whereToPlay: "Jogue no espaço da FORJA na sala 102 do prédio Brum",
     standLocation: "Encontre a FORJA no estande principal",
-    socialUrl: "",
+    socialUrl: "https://www.instagram.com/thepartyoflosers/",
     image: "/assets/games/the-party-of-losers.png",
   },
   {
