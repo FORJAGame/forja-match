@@ -17,7 +17,8 @@ function sanitizeSessionForFirestore(session) {
     completed: session.completed,
     answers: session.answers,
     result: session.result,
-    appVersion: "mvp-1",
+    // mvp-2: pontuação por similaridade de cosseno + calibração por jogo.
+    appVersion: "mvp-2",
     updatedAt: serverTimestamp(),
   };
 }

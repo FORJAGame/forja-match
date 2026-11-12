@@ -8,8 +8,14 @@ import AdminExport from "./components/AdminExport";
 import { cards } from "./data/cards";
 import { games } from "./data/games";
 import { getKioskId } from "./services/storage";
-import { updatePlayerProfile, calculateMatch } from "./utils/match";
+import {
+  updatePlayerProfile,
+  calculateMatch,
+  calibrateGameOffsets,
+} from "./utils/match";
 import { saveSession, syncPendingSessions } from "./services/analytics";
+
+const gameOffsets = calibrateGameOffsets(cards, games);
 
 
 function createSession() {
@@ -68,7 +74,7 @@ function App() {
     const isLastCard = currentCardIndex === cards.length - 1;
 
     if (isLastCard) {
-      const matchResult = calculateMatch(updatedProfile, games);
+      const matchResult = calculateMatch(updatedProfile, games, gameOffsets);
 
       const completedSession = {
         ...currentSession,
