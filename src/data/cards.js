@@ -103,4 +103,14 @@ export const cards = [
       surpresa: 1,
     },
   },
+  {
+    id: "card_11",
+    text: "Curto partidas rápidas no estilo arcade, disputando pontos e recordes",
+    tags: {
+      competicao: 3,
+      nostalgico: 2,
+      ritmo_rapido: 2,
+      jogo_curto: 2,
+    },
+  },
 ];

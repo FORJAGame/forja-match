@@ -1,5 +1,5 @@
 const CACHE_PREFIX = "forja-match-assets";
-const CACHE_VERSION = "v1";
+const CACHE_VERSION = "v2";
 const CACHE_NAME = `${CACHE_PREFIX}-${CACHE_VERSION}`;
 
 const STATIC_ASSET_URLS = [
@@ -11,6 +11,7 @@ const STATIC_ASSET_URLS = [
   "/assets/games/ismalia.png",
   "/assets/games/lost-fields.jpeg",
   "/assets/games/mortis-pactum.png",
+  "/assets/games/pong-champs.webp",
   "/assets/games/the-party-of-losers.png",
   "/assets/games/you-are-gonna-be-late.png",
 ];

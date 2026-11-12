@@ -88,6 +88,24 @@ export const games = [
     socialUrl: "https://www.instagram.com/onirika_gstudio/",
     image: "/assets/games/lost-fields.jpeg",
   },
+  {
+    id: "pong_champs",
+    name: "Pong-Champs",
+    description:
+      "Um jogo para quem curte competitividade, esportes e a nostalgia de jogos estilo arcade.",
+    tags: {
+      competicao: 3,
+      jogo_curto: 3,
+      ritmo_rapido: 2,
+      atmosfera: 2,
+      tensao: 1,
+      nostalgico: 1,
+    },
+    whereToPlay: "Jogue agora, aqui 👆 na sala de estudos",
+    standLocation: "Encontre a FORJA no estande principal",
+    socialUrl: "https://www.instagram.com/outsiders.gstudio/",
+    image: "/assets/games/pong-champs.webp",
+  },
   /*{
     id: "deco_dica",
     name: "DECO DICA",

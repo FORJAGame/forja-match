@@ -18,7 +18,8 @@ function sanitizeSessionForFirestore(session) {
     answers: session.answers,
     result: session.result,
     // mvp-2: pontuação por similaridade de cosseno + calibração por jogo.
-    appVersion: "mvp-2",
+    // mvp-3: Pong-Champs + card_11 (competição/arcade).
+    appVersion: "mvp-3",
     updatedAt: serverTimestamp(),
   };
 }
