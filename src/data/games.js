@@ -88,7 +88,7 @@ export const games = [
     socialUrl: "https://www.instagram.com/onirika_gstudio/",
     image: "/assets/games/lost-fields.jpeg",
   },
-  {
+  /*{
     id: "deco_dica",
     name: "DECO DICA",
     description: "Um jogo de cartas para quem quer se divertir com a galera",
@@ -104,7 +104,7 @@ export const games = [
     socialUrl: "https://www.instagram.com/deco.dica/",
     image: "/assets/games/deco-dica.png",
   },
-  /*{
+  {
     id: "ecos_da_mata",
     name: "Ecos da Mata",
     description: "Um jogo sobre...",
