@@ -206,6 +206,40 @@ Use o arquivo `.env.example` como referência.
 
 ---
 
+## Simulação de balanceamento do match
+
+Para conferir se todos os jogos têm chances parecidas de ser indicados, rode:
+
+```bash
+npm run simulate
+```
+
+O script (`scripts/simulate-match.mjs`) testa todas as combinações possíveis de respostas aos cards (ou uma amostra grande, se houver mais de 20 cards) e mostra, para cada jogo:
+
+* **% sem calibração:** com que frequência o jogo vence usando só a similaridade entre o perfil do jogador e as tags do jogo;
+* **% calibrado:** com que frequência vence com o ajuste automático aplicado pelo app;
+* **offset:** o ajuste calculado para o jogo.
+
+Também mostra em quantas combinações a calibração mudou o vencedor e quantos empates houve no primeiro lugar.
+
+Como ler o resultado:
+
+* Com N jogos, o ideal é cada um ficar perto de `100 / N` % na coluna calibrada.
+* Se um jogo vencer muito pouco **sem calibração**, o script avisa: as tags dele provavelmente se sobrepõem às de outro jogo. A calibração compensa, mas vale revisar as tags.
+* O script também avisa quando um jogo usa uma tag que nenhum card mede (essa tag não tem efeito no match).
+
+Rode a simulação sempre que adicionar, remover ou editar jogos e cards. Veja também o guia [Como adicionar um novo jogo](docs/ADICIONAR-JOGO.md).
+
+### Como o match é calculado
+
+1. Cada card tem tags com pesos. Aceitar um card soma os pesos ao perfil do jogador; recusar subtrai metade.
+2. A pontuação de cada jogo é a similaridade de cosseno entre o perfil do jogador e as tags do jogo, o que evita favorecer jogos com mais tags.
+3. Ao abrir, o app calcula um pequeno ajuste (offset) por jogo para que, considerando todas as respostas possíveis, todos sejam indicados com frequência parecida. Isso só muda o resultado em perfis divididos entre jogos.
+
+A lógica está em `src/utils/match.js`.
+
+---
+
 ## Build de produção
 
 Para gerar a versão de produção:
