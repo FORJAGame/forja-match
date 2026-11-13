@@ -23,7 +23,7 @@ Mapeamento do que precisa ser feito no projeto, organizado em épicos. Cada item
 | A1 | Voltar à tela inicial após inatividade | P0 | Totem e offline |
 | A2 | App não abre offline (shell fora do cache) | P0 | Totem e offline |
 | A3 | Iluminação do cartucho 3D depende de CDN externo | P0 | Totem e offline |
-| A4 | Link externo na tela inicial permite sair do app | P1 | Totem e offline |
+| A4 | Toques acidentais no link da Netlify tiram o visitante do app | P1 | Totem e offline |
 | A5 | Manifest PWA para instalar no Android em tela cheia | P1 | Totem e offline |
 | A6 | Totens sem ID configurado são registrados como `totem_01` | P1 | Totem e offline |
 | A7 | Sincronização com Firestore pouco resiliente em rede instável | P2 | Totem e offline |
@@ -84,14 +84,24 @@ Mapeamento do que precisa ser feito no projeto, organizado em épicos. Cada item
 - [ ] O arquivo entra no precache do service worker.
 - [ ] O cartucho renderiza corretamente com a rede desligada.
 
-### A4 · Link externo na tela inicial permite sair do app
+### A4 · Toques acidentais no link da Netlify tiram o visitante do app
 **Labels:** `bug`, `area:kiosk-offline`, `P1`
 
-**Contexto:** o rodapé "This site is powered by Netlify" na `StartScreen` é um link com `target="_blank"`. No totem, um toque abre outra aba e tira o visitante da experiência.
+**Contexto:** o rodapé "This site is powered by Netlify" na `StartScreen` é um link com `target="_blank"`. **Ele precisa continuar existindo e funcionando:** é uma exigência do plano open source da Netlify, que dá acesso aos benefícios de build. O problema é que ele fica logo abaixo do botão "Começar", e alguns visitantes tocam nele sem querer, abrindo outra aba e saindo da experiência.
+
+**Opções (podem ser combinadas)**
+1. **Afastar o link do botão:** mover o crédito para a borda inferior da tela, longe do "Começar", com fonte pequena e sem padding extra de toque. Resolve a maioria dos toques acidentais sem mudar o link.
+2. **Confirmar antes de sair:** ao tocar no link, mostrar um aviso "Abrir o site da Netlify?" com um botão grande "Voltar ao jogo" e um menor "Abrir". O link segue funcional.
+3. **Bloquear domínios externos no totem:** usar um navegador de quiosque no Android (ex.: Fully Kiosk Browser) com lista de URLs permitidas, liberando só o domínio do FORJA Match. O site público mantém o link; o aparelho não sai do app. Não exige mudança no código e protege contra outras saídas (ver A5).
+
+**Recomendação:** 1 + 3. A opção 2 é alternativa caso não seja possível controlar o navegador do totem.
 
 **Critérios de aceite**
-- [ ] No modo totem, o crédito é texto sem link (ou o link fica só no README).
-- [ ] Nenhum outro elemento clicável leva para fora do app.
+- [ ] Conferir nos termos do plano open source da Netlify o que é exigido (posição, texto, link) antes de mudar.
+- [ ] O link da Netlify continua visível e funcional na página principal.
+- [ ] O link fica fora da área de toque do botão "Começar" no totem (1080 × 1920).
+- [ ] No totem, um toque no link não tira o visitante do app (bloqueio no navegador de quiosque ou confirmação).
+- [ ] Nenhum outro elemento clicável leva para fora do app sem intenção clara.
 
 ### A5 · Manifest PWA para instalar no Android em tela cheia
 **Labels:** `enhancement`, `area:kiosk-offline`, `P1`
