@@ -106,6 +106,23 @@ export const games = [
     socialUrl: "https://www.instagram.com/outsiders.gstudio/",
     image: "/assets/games/pong-champs.webp",
   },
+  {
+    id: "arrudiando_recife",
+    name: "Arrudiando Recife",
+    description:
+      "Um jogo para quem curte a cultura recifense, uma boa resenha e arretadas aventuras pelo tabuleiro.",
+    tags: {
+      arte: 3,
+      social: 3,
+      humor: 2,
+      competicao: 2,
+      atmosfera: 1,
+    },
+    whereToPlay: "Jogue agora, aqui 👆 na sala de estudos",
+    standLocation: "Encontre a FORJA no estande principal",
+    socialUrl: "https://www.instagram.com/arrudiandorecife/",
+    image: "/assets/games/arrudiando-recife.webp",
+  },
   /*{
     id: "deco_dica",
     name: "DECO DICA",
