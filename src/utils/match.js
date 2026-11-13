@@ -65,6 +65,8 @@ export function calibrateGameOffsets(cards, games) {
   );
   const offsets = games.map(() => 0);
   const target = 1 / games.length;
+  let bestOffsets = [...offsets];
+  let bestSpread = Infinity;
 
   for (let iteration = 0; iteration < CALIBRATION_MAX_ITERATIONS; iteration += 1) {
     const wins = games.map(() => 0);
@@ -74,17 +76,29 @@ export function calibrateGameOffsets(cards, games) {
     }
 
     const shares = wins.map((count) => count / scores.length);
+    const spread = Math.max(...shares) - Math.min(...shares);
 
-    if (Math.max(...shares) - Math.min(...shares) < CALIBRATION_TOLERANCE) {
+    // Guarda o melhor ajuste visto, pois a distribuição pode oscilar.
+    if (spread < bestSpread) {
+      bestSpread = spread;
+      bestOffsets = [...offsets];
+    }
+
+    if (spread < CALIBRATION_TOLERANCE) {
       break;
     }
 
+    // Passo decrescente para convergir em vez de oscilar.
+    const learningRate = CALIBRATION_LEARNING_RATE / (1 + iteration / 20);
+
     shares.forEach((share, index) => {
-      offsets[index] += CALIBRATION_LEARNING_RATE * (target - share);
+      offsets[index] += learningRate * (target - share);
     });
   }
 
-  return Object.fromEntries(games.map((game, index) => [game.id, offsets[index]]));
+  return Object.fromEntries(
+    games.map((game, index) => [game.id, bestOffsets[index]]),
+  );
 }
 
 function indexOfBest(gameScores, offsets) {

@@ -19,7 +19,10 @@ function sanitizeSessionForFirestore(session) {
     result: session.result,
     // mvp-2: pontuação por similaridade de cosseno + calibração por jogo.
     // mvp-3: Pong-Champs + card_11 (competição/arcade).
-    appVersion: "mvp-3",
+    // mvp-4: Arrudiando Recife + card_12 (jogos de mesa com amigos/família).
+    // mvp-5: questionário reescrito com 10 cards curtos e específicos.
+    //        Os ids card_01..card_10 têm textos novos a partir desta versão.
+    appVersion: "mvp-5",
     updatedAt: serverTimestamp(),
   };
 }
